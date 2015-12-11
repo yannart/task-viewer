@@ -26,6 +26,8 @@
 				<b><c:out value="${i.taskName}" /></b> -- <c:out value="${i.taskDescription} - ${i.taskPriority} ${i.taskStatus}" />
 			</p>
 		</c:forEach>
+		
+		Task list updated at <c:out value="${updated}" />
 	</div>
 </div>
 

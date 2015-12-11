@@ -1,6 +1,7 @@
 package com.gg.service;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import org.apache.commons.logging.Log;
@@ -21,7 +22,14 @@ public class TaskServiceImpl implements TaskService {
 
     private boolean cacheInvalidated = true;
 
-    List<Task> cachedTasks = new ArrayList<Task>();
+    private List<Task> cachedTasks = new ArrayList<Task>();
+    
+    private Date lastUpdate = null;
+
+    @Override
+    public Date lastUpdate() {
+        return lastUpdate;
+    }
 
     @Override
     public List<Task> listTasks() {
@@ -35,6 +43,7 @@ public class TaskServiceImpl implements TaskService {
             synchronized (this) {
                 cachedTasks = newCachedTasks;
                 cacheInvalidated = false;
+                lastUpdate = new Date();
             }
         }
 

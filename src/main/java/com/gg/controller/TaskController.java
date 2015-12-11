@@ -20,15 +20,16 @@ public class TaskController {
 
     @RequestMapping(value = "/", method = RequestMethod.GET)
     public String listTask(ModelMap model) {
-        
+
         log.info("Task list view called.");
         model.addAttribute("tasks", taskService.listTasks());
+        model.addAttribute("updated", taskService.lastUpdate());
         return "tasks";
     }
 
     @RequestMapping(value = "/flush", method = RequestMethod.GET)
     public void flush() {
-        
+
         log.info("Flush called.");
         taskService.tasksUpdated();
     }
