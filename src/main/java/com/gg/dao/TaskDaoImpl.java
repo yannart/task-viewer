@@ -26,7 +26,7 @@ public class TaskDaoImpl implements TaskDao {
     @Override
     public List<Task> findAll() {
         List<Task> tasks = this.jdbcTemplate
-                .query("select id, task_name, task_description, task_priority, task_status, task_archived from task",
+                .query("select id, task_name, task_description, task_priority, task_status, task_archived from task where task_archived=false",
                         new RowMapper<Task>() {
                             public Task mapRow(ResultSet rs, int rowNum)
                                     throws SQLException {

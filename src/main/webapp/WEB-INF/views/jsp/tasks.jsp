@@ -23,7 +23,7 @@
 		<h1>${title}</h1>
 		<c:forEach items="${tasks}" var="i">
 			<p>
-				<c:out value="${i.taskId} ${i.taskName} -- ${i.taskDescription} - ${i.taskPriority} ${i.taskStatus}" />
+				<b><c:out value="${i.taskName}" /></b> -- <c:out value="${i.taskDescription} - ${i.taskPriority} ${i.taskStatus}" />
 			</p>
 		</c:forEach>
 	</div>
