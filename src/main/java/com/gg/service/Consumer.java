@@ -5,15 +5,14 @@ import javax.jms.Message;
 import javax.jms.MessageListener;
 import javax.jms.TextMessage;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 @Component
 public class Consumer implements MessageListener {
 
-    private static final Logger log = LoggerFactory.getLogger(Consumer.class);
+    // private static final Logger log =
+    // LoggerFactory.getLogger(Consumer.class);
 
     @Autowired
     TaskService taskService;
@@ -21,8 +20,7 @@ public class Consumer implements MessageListener {
     public void onMessage(Message message) {
         if (message instanceof TextMessage) {
             try {
-                log.info("Received message: "
-                        + ((TextMessage) message).getText());
+                String msg = ((TextMessage) message).getText();
 
                 // On each message received, unvalidate the cache.
                 taskService.tasksUpdated();
@@ -30,7 +28,7 @@ public class Consumer implements MessageListener {
                 throw new RuntimeException(ex);
             }
         } else {
-            log.warn("Received unknown message.");
+            // log.warn("Received unknown message.");
         }
     }
 

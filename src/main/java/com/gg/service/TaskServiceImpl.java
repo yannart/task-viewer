@@ -4,8 +4,6 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -15,8 +13,7 @@ import com.gg.model.Task;
 @Service
 public class TaskServiceImpl implements TaskService {
 
-    private static final Logger log = LoggerFactory
-            .getLogger(TaskServiceImpl.class);
+    //private static final Logger log = LoggerFactory.getLogger(TaskServiceImpl.class);
 
     @Autowired
     TaskDao taskDao;
@@ -35,10 +32,10 @@ public class TaskServiceImpl implements TaskService {
     @Override
     public List<Task> listTasks() {
 
-        log.info("Listing the tasks.");
+        //log.info("Listing the tasks.");
 
         if (cacheInvalidated) {
-            log.info("The cache is not valid, refreshing the list of tasks.");
+            //log.info("The cache is not valid, refreshing the list of tasks.");
             List<Task> newCachedTasks = taskDao.findAll();
 
             synchronized (this) {
@@ -54,7 +51,7 @@ public class TaskServiceImpl implements TaskService {
     @Override
     public void tasksUpdated() {
 
-        log.info("The list of tasks has been updated, marking the cache as not valid.");
+        //log.info("The list of tasks has been updated, marking the cache as not valid.");
 
         synchronized (this) {
             cacheInvalidated = true;
