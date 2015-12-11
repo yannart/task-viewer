@@ -4,8 +4,8 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -15,7 +15,8 @@ import com.gg.model.Task;
 @Service
 public class TaskServiceImpl implements TaskService {
 
-    Log log = LogFactory.getLog(TaskServiceImpl.class);
+    private static final Logger log = LoggerFactory
+            .getLogger(TaskServiceImpl.class);
 
     @Autowired
     TaskDao taskDao;
@@ -23,7 +24,7 @@ public class TaskServiceImpl implements TaskService {
     private boolean cacheInvalidated = true;
 
     private List<Task> cachedTasks = new ArrayList<Task>();
-    
+
     private Date lastUpdate = null;
 
     @Override

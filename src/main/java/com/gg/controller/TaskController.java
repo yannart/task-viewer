@@ -1,7 +1,7 @@
 package com.gg.controller;
 
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
@@ -13,7 +13,7 @@ import com.gg.service.TaskService;
 @Controller
 public class TaskController {
 
-    Log log = LogFactory.getLog(TaskController.class);
+    private static final Logger log = LoggerFactory.getLogger(TaskController.class);
 
     @Autowired
     TaskService taskService;

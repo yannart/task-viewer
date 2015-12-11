@@ -5,18 +5,18 @@ import javax.jms.Message;
 import javax.jms.MessageListener;
 import javax.jms.TextMessage;
 
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 @Component
 public class Consumer implements MessageListener {
 
+    private static final Logger log = LoggerFactory.getLogger(Consumer.class);
+
     @Autowired
     TaskService taskService;
-
-    private Log log = LogFactory.getLog(Consumer.class);
 
     public void onMessage(Message message) {
         if (message instanceof TextMessage) {
