@@ -6,6 +6,8 @@ import java.util.List;
 
 import javax.sql.DataSource;
 
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowMapper;
@@ -16,6 +18,8 @@ import com.gg.model.Task;
 @Repository
 public class TaskDaoImpl implements TaskDao {
 
+    Log log = LogFactory.getLog(TaskDaoImpl.class);
+
     private JdbcTemplate jdbcTemplate;
 
     @Autowired
@@ -25,6 +29,9 @@ public class TaskDaoImpl implements TaskDao {
 
     @Override
     public List<Task> findAll() {
+
+        log.info("Retrieving the tasks from the DB.");
+
         List<Task> tasks = this.jdbcTemplate
                 .query("select id, task_name, task_description, task_priority, task_status, task_archived from task where task_archived=false",
                         new RowMapper<Task>() {

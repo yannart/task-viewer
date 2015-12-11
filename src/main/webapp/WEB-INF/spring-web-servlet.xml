@@ -1,6 +1,7 @@
 <beans xmlns="http://www.springframework.org/schema/beans"
 	xmlns:context="http://www.springframework.org/schema/context"
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:mvc="http://www.springframework.org/schema/mvc"
+	xmlns:p="http://www.springframework.org/schema/p"
 	xsi:schemaLocation="
         http://www.springframework.org/schema/beans     
         http://www.springframework.org/schema/beans/spring-beans.xsd
@@ -31,6 +32,23 @@
 		<property name="url" value="${jdbc.url}" />
 		<property name="username" value="${jdbc.username}" />
 		<property name="password" value="${jdbc.password}" />
+	</bean>
+
+	<!-- JMS Listener -->
+	<bean id="connectionFactory" class="org.apache.activemq.ActiveMQConnectionFactory"
+		p:brokerURL="${activemq.url}" p:userName="${activemq.username}"
+		p:password="${activemq.password}" />
+
+	<bean id="destination" class="org.apache.activemq.command.ActiveMQQueue"
+		p:physicalName="${activemq.queue}" />
+
+	<bean id="consumer" class="com.gg.service.Consumer" />
+
+	<bean id="jmsContainer"
+		class="org.springframework.jms.listener.DefaultMessageListenerContainer">
+		<property name="connectionFactory" ref="connectionFactory" />
+		<property name="destination" ref="destination" />
+		<property name="messageListener" ref="consumer" />
 	</bean>
 
 	<context:property-placeholder location="classpath*:application.properties" />
